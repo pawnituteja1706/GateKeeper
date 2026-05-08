@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="loginstyle.css">
+</head>
+<body>
+<header>
+    <h2>GateKeeper</h2>
+
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Sign Up</a>
+    </nav>
+</header>
+<div class="login-container">
+    <h2>Login</h2>
+    <form onsubmit="loginUser(event)">
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" placeholder="Enter your username" required>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p class="extra">Don't have an account? <a href="signup.html">Sign up</a></p>
+</div>
+<script>
+
+function loginUser(event){
+
+    event.preventDefault();
+
+    let enteredUsername = document.querySelectorAll("input")[0].value;
+    let enteredPassword = document.querySelectorAll("input")[1].value;
+
+    let savedUsername = localStorage.getItem("username");
+    let savedPassword = localStorage.getItem("password");
+
+    let logs = JSON.parse(localStorage.getItem("logs")) || [];
+
+
+    if(
+        enteredUsername === savedUsername &&
+        enteredPassword === savedPassword
+    ){
+
+        logs.push({
+            user: enteredUsername,
+            action: "Login",
+            status: "Successful",
+            time: new Date().toLocaleString()
+        });
+
+        localStorage.setItem("logs", JSON.stringify(logs));
+
+        alert("Login Successful!");
+
+        window.location.href = "detection.html";
+
+    }
+
+
+    else{
+
+        logs.push({
+            user: enteredUsername,
+            action: "Login",
+            status: "Failed",
+            time: new Date().toLocaleString()
+        });
+
+        localStorage.setItem("logs", JSON.stringify(logs));
+
+        alert("Invalid Username or Password!");
+    }
+
+}
+
+</script>
+</body>
+</html>
