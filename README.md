@@ -8,6 +8,7 @@ Features:-
 - Activity monitoring dashboard
 
 How it works:-
+[Open Home.html] 
 1. User Login
 User enters credentials securely.
 2. Activity Recorded
